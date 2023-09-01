@@ -1,0 +1,22 @@
+name: build-results
+on:
+  push:
+    branches:
+      - main
+      - feat/ci-workflow
+  workflow_dispatch:
+
+permissions:
+    id-token: write
+    contents: read
+    
+jobs:
+  build:
+    permissions:
+      id-token: write
+      contents: write
+    uses: master-the-legacy/gh-reusable-workflows/.github/workflows/ci.yml@feat/reusable-ci-workflow
+    with:
+      role-to-assume: arn:aws:iam::760772947412:role/github-actions/gh-oidc
+      app: votingapp-results
+
